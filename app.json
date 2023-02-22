@@ -8,7 +8,7 @@
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "updates": {
@@ -18,9 +18,11 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.ayushkarn.tiffin",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.ayushkarn.tiffin",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
@@ -28,6 +30,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "064f11da-250f-483f-a0b2-7d5a5c3204e5"
+      }
     }
   }
 }
