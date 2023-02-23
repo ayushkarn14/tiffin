@@ -42,10 +42,19 @@ const firebaseConfig = {
   };
 function LoginScreen(props) {
     const navigation = useNavigation();
+    async function getNumber(){
+        const value = await AsyncStorage.getItem('number');
+        console.log(value);
+        if(value!=null){
+            navigation.replace('Home');
+        }
+    }
+    getNumber();
     function onSignUp() {
         navigation.navigate("SignUp");
     }
     const [number,setNumber]=React.useState("");
+    const [localNumber,setLocalNumber]=React.useState("");
     const [password, setPassword] = React.useState("");
     
     return (

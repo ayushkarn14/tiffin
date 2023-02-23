@@ -55,7 +55,7 @@ function HomeScreen(props){
         <Text>Number: {number}</Text>
         <Button title="Logout" onPress={async()=>{
           //loging out
-          await AsyncStorage.removeItem("number");
+          await AsyncStorage.removeItem('number');
           console.log("Removed");
           navigation.replace("Login");
         }}/>
