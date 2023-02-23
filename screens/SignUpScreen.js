@@ -6,8 +6,6 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { auth } from "../firebaseConfig";
 import firestore from "@react-native-firebase/firestore";
-
-import { useNavigation } from "@react-navigation/native";
 import {
     StyleSheet,
     Text,
@@ -33,7 +31,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 function SignUpScreen() {
-    const navigation = useNavigation();
 
     const [name, setName] = React.useState("");
     // const [mail, setEmail] = React.useState("");

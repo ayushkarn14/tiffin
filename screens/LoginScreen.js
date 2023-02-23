@@ -15,6 +15,7 @@ import {
     TouchableNativeFeedback,
     ImageBackground,
     ScrollView,
+    AsyncStorage
 } from "react-native";
 
 const firebaseConfig = {
@@ -28,14 +29,25 @@ const firebaseConfig = {
   };
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+  async function storeData(data) {
+    try {
+      await AsyncStorage.setItem(
+        'number',
+        data,
+      );
+    } catch (error) {
+      console.log(data);
+      // Error saving data
+    }
+  };
 function LoginScreen(props) {
     const navigation = useNavigation();
     function onSignUp() {
         navigation.navigate("SignUp");
     }
-
+    const [number,setNumber]=React.useState("");
     const [password, setPassword] = React.useState("");
-    const [number, setNumber] = React.useState("");
+    
     return (
         <View style={{ backgroundColor: "white", height: "100%" }}>
             <ImageBackground
@@ -74,17 +86,24 @@ function LoginScreen(props) {
                     <TouchableNativeFeedback
                         style={{ borderRadius: 10 }}
                         onPress={async () => {
+                            let numFound=false;
                             const querySnapshot = await getDocs(
                                 collection(db, "users")
                             );
                             querySnapshot.forEach((doc) => {
                                 if(doc.data().phone==number){
-                                    if(doc.data().password==password)
+                                    numFound=true;
+                                    if(doc.data().password==password){
                                         alert("Logged In");
+                                        storeData(number);
+                                        navigation.replace("Home");
+                                    }
                                     else
                                         alert("Wrong number or password");
                                 }
                             });
+                            if(!numFound)
+                                alert("Wrong number or password");
                         }}
                     >
                         <View style={styles.button}>
