@@ -1,29 +1,28 @@
 import React, { cloneElement } from "react";
 import { View, Text, Button } from "react-native";
-import {AsyncStorage} from 'react-native';
-import { Alert} from "react-native";
+import { AsyncStorage } from "react-native";
+import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { TextInput } from "react-native-gesture-handler";
 import { initializeApp } from "firebase/app";
-import { getFirestore,collection, getDocs } from "firebase/firestore";
-
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDpE2lvJ0Mo3l-YAUo2qqA8Huq2JZz4UMc",
-  authDomain: "tiffin-bdce5.firebaseapp.com",
-  projectId: "tiffin-bdce5",
-  storageBucket: "tiffin-bdce5.appspot.com",
-  messagingSenderId: "343099813980",
-  appId: "1:343099813980:web:a073b34c740665c2fef699",
-  measurementId: "G-S8M05G38S8"
+    apiKey: "AIzaSyDpE2lvJ0Mo3l-YAUo2qqA8Huq2JZz4UMc",
+    authDomain: "tiffin-bdce5.firebaseapp.com",
+    projectId: "tiffin-bdce5",
+    storageBucket: "tiffin-bdce5.appspot.com",
+    messagingSenderId: "343099813980",
+    appId: "1:343099813980:web:a073b34c740665c2fef699",
+    measurementId: "G-S8M05G38S8",
 };
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-function HomeScreen(props){
+function HomeScreen(props) {
     const [number, setNumber] = React.useState("");
-    async function getNumber(){
-        const value = await AsyncStorage.getItem('number');
+    async function getNumber() {
+        const value = await AsyncStorage.getItem("number");
         setNumber(value);
     }
     getNumber();
@@ -38,8 +37,8 @@ function HomeScreen(props){
             collection(db, "users")
         );
         querySnapshot.forEach((doc) => {
-            if(doc.data().phone==number){
-                numFound=true;
+            if (doc.data().phone == number) {
+                numFound = true;
                 setName(doc.data().name);
                 setAddress(doc.data().address);
                 setBhu(doc.data().bhu);
@@ -47,7 +46,7 @@ function HomeScreen(props){
         });
     }
     getInfo();
-    
+
     return (
         <View
             style={{ justifyContent: "center", alignItems: "center", flex: 1 }}
@@ -56,7 +55,6 @@ function HomeScreen(props){
         <Text>Address: {address}</Text>
         <Text>Number: {number}</Text>
         <Text>BHU Student: {isBhu}</Text>
-        
         <Button title="Logout" onPress={async()=>{
           //loging out
           await AsyncStorage.removeItem('number');
@@ -65,6 +63,6 @@ function HomeScreen(props){
         }}/>
         </View>
     );
-};
+}
 
 export default HomeScreen;
