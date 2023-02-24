@@ -31,6 +31,7 @@ function HomeScreen(props){
 
     const [address,setAddress]=React.useState("");
     const [name,setName]=React.useState("");
+    const [isBhu,setBhu]=React.useState("");
     async function getInfo(){
         let numFound=false;
         const querySnapshot = await getDocs(
@@ -41,6 +42,7 @@ function HomeScreen(props){
                 numFound=true;
                 setName(doc.data().name);
                 setAddress(doc.data().address);
+                setBhu(doc.data().bhu);
             }
         });
     }
@@ -53,6 +55,8 @@ function HomeScreen(props){
         <Text>Name: {name}</Text>
         <Text>Address: {address}</Text>
         <Text>Number: {number}</Text>
+        <Text>BHU Student: {isBhu}</Text>
+        
         <Button title="Logout" onPress={async()=>{
           //loging out
           await AsyncStorage.removeItem('number');
