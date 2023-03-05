@@ -1,7 +1,8 @@
 import LoginScreen from "./screens/LoginScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import { NavigationContainer } from "@react-navigation/native";
-import HomeScreen from "./screens/HomeScreen";
+// import HomeScreen from "./screens/HomeScreen";
+import ParentScreen from "./screens/ParentScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
@@ -40,7 +41,7 @@ export default function App() {
                 />
                 <Stack.Screen
                     name="Home"
-                    component={HomeScreen}
+                    component={ParentScreen}
                     options={{
                         title: "Home",
                         headerStyle: {
@@ -50,6 +51,7 @@ export default function App() {
                         headerTitleStyle: {
                             fontWeight: "bold",
                         },
+                        headerShown: false,
                     }}
                 />
             </Stack.Navigator>
